@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import styles from '../styles/Robot.module.css';
+import styles from './page.module.scss';
 
 const gridSize = 5;
 
