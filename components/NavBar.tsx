@@ -12,32 +12,21 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  useColorModeValue,
   useDisclosure,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
-import CustomButton from "./CustomButton";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 export default function NavBar() {
   const { isOpen: isOpenMD, onToggle: onToggleMD } = useDisclosure();
+  const bgColor = "var(--nav-background-color)";
 
   return (
     <Box>
-      <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        minH={"60px"}
-        p={{ base: 4 }}
-        align={"center"}
-      >
+      <Flex bg={bgColor} minH={"60px"} p={{ base: 4 }} align={"center"}>
         <Flex
-          flex={{ base: 1, lg: "auto" }}
-          display={{ base: "flex", lg: "none" }}
+          flex={{ base: 1, md: "auto" }}
+          display={{ base: "flex", md: "none" }}
         >
           <IconButton
             onClick={onToggleMD}
@@ -52,7 +41,7 @@ export default function NavBar() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", lg: "start" }}>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <ChakraLink href="/">
             <Image
               rounded={"md"}
@@ -65,9 +54,9 @@ export default function NavBar() {
         </Flex>
 
         <Flex
-          flex={{ base: 1, lg: 6 }}
-          justify={{ base: "center", lg: "left" }}
-          display={{ base: "none", lg: "flex" }}
+          flex={{ base: 1, md: 6 }}
+          justify={{ base: "center", md: "left" }}
+          display={{ base: "none", md: "flex" }}
           ml={10}
           mr={5}
         >
@@ -92,10 +81,7 @@ export default function NavBar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
-
+  const linkHoverColor = "var(--brand-color-rgb)";
   return (
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
@@ -108,7 +94,6 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
-                color={linkColor}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
@@ -122,12 +107,14 @@ const DesktopNav = () => {
               <PopoverContent
                 border={0}
                 boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
+                p={2}
+                width="100vw"
+                maxWidth="100vw"
+                top={4}
+                left={0}
+                right={0}
               >
-                <Stack>
+                <Stack paddingLeft={`calc(12.5% + var(--chakra-space-10))`}>
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
@@ -150,42 +137,27 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
+          <Text fontWeight={500}>{label}</Text>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
+            _groupHover={{ color: "var(--brand-color-rgb)" }}
+            fontSize={"sm"}
           >
-            {label}
+            {subLabel}
           </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
-        <Flex
-          transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
-          opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
-          flex={1}
-        >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
       </Stack>
     </Box>
   );
 };
 
 const MobileNav = () => {
+  const bgColor = "var(--nav-background-color)";
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
+    <Stack bg={bgColor} p={4} display={{ md: "none" }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -208,12 +180,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: "none",
         }}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
+        <Text fontWeight={600}>{label}</Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
@@ -226,17 +193,18 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       </Box>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
+        <Stack mt={2} pl={4} align={"start"}>
           {children &&
             children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
+              <Box
+                as="a"
+                key={child.label}
+                py={2}
+                href={child.href}
+                _hover={{
+                  color: "var(--brand-color-rgb)",
+                }}
+              >
                 {child.label}
               </Box>
             ))}
@@ -260,7 +228,7 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Robot",
         subLabel: "Robot to inspire you",
-        href: "#",
+        href: "/robot",
       },
     ],
   },
@@ -270,7 +238,7 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Still Robot",
         subLabel: "Find your dream robot",
-        href: "#",
+        href: "/robot",
       },
     ],
   },
@@ -280,7 +248,7 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Robot again",
         subLabel: "Find your dream robot",
-        href: "#",
+        href: "/robot",
       },
     ],
   },
