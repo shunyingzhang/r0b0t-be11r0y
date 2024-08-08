@@ -169,9 +169,9 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <Stack spacing={2} onClick={children && onToggle}>
       <Box
-        py={2}
+        pt={2}
         as="a"
         href={href ?? "#"}
         justifyContent="space-between"
@@ -186,20 +186,19 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
             as={ChevronDownIcon}
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
-            w={6}
-            h={6}
+            w={4}
+            h={4}
           />
         )}
       </Box>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack mt={2} pl={4} align={"start"}>
+        <Stack pl={4} align={"start"}>
           {children &&
             children.map((child) => (
               <Box
                 as="a"
                 key={child.label}
-                py={2}
                 href={child.href}
                 _hover={{
                   color: "var(--brand-color-rgb)",
