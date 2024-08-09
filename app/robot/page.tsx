@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import styles from "./page.module.scss";
 import { Box } from "@chakra-ui/react";
+import CustomButton from "@/components/CustomButton";
 
 const gridSize = 5;
 
@@ -99,6 +99,7 @@ export default function Robot() {
       <Box alignContent={"center"}>
         <Box
           display={"grid"}
+          justifyContent={"center"}
           gridTemplateColumns={`repeat(${gridSize}, 50px)`}
           gridTemplateRows={`repeat(${gridSize}, 50px)`}
           gap={2}
@@ -107,9 +108,15 @@ export default function Robot() {
           {createGrid()}
         </Box>
         <Box display={"flex"} gap={2}>
-          <button onClick={rotateLeft}>Rotate Left</button>
-          <button onClick={rotateRight}>Rotate Right</button>
-          <button onClick={moveForward}>Move Forward</button>
+          <CustomButton size="lg" onClick={rotateLeft}>
+            Rotate Left
+          </CustomButton>
+          <CustomButton size="lg" onClick={rotateRight}>
+            Rotate Right
+          </CustomButton>
+          <CustomButton size="lg" onClick={moveForward}>
+            Move Forward
+          </CustomButton>
         </Box>
       </Box>
     </Box>
