@@ -70,7 +70,7 @@ export default function NavBar() {
           direction={"row"}
           spacing={6}
         >
-          <FaShoppingCart size={18} />
+          <FaShoppingCart size={18} color="var(--foreground-secondary-color)" />
         </Stack>
       </Flex>
       <Collapse in={isOpenMD} animateOpacity>
@@ -145,6 +145,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
             transition={"all .3s ease"}
             _groupHover={{ color: "var(--brand-color-rgb)" }}
             fontSize={"sm"}
+            color="var(--foreground-secondary-color)"
           >
             {subLabel}
           </Text>
@@ -203,6 +204,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 _hover={{
                   color: "var(--brand-color-rgb)",
                 }}
+                color="var(--foreground-secondary-color)"
               >
                 {child.label}
               </Box>

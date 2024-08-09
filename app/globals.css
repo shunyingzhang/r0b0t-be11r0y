@@ -1,6 +1,7 @@
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-primary-rgb: 0, 0, 0;
+  --foreground-secondary-color: #7F7F7F;
   --background-color: #EFEAE5;
   --brand-color-rgb: rgb(225 90 29);
   --brand-hover-color-rgb: #c75724;
@@ -9,6 +10,6 @@
 
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-primary-rgb));
   background: var(--background-color);
 }
