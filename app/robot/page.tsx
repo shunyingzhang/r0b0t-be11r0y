@@ -36,11 +36,11 @@ export default function Robot() {
         grid.push(
           <Box
             key={`cell-${row}-${col}`}
-            width="50px"
-            height="50px"
+            width={{ sm: "50px", md: "80px", lg: "100px" }}
+            height={{ sm: "50px", md: "80px", lg: "100px" }}
             border="1.5px solid"
             borderColor="var(--brand-color-rgb)"
-            borderRadius="5px"
+            borderRadius={{ sm: "5px", md: "8px", lg: "10px" }}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -96,18 +96,31 @@ export default function Robot() {
 
   return (
     <Box height={"60vh"} display={"flex"} justifyContent={"center"}>
-      <Box alignContent={"center"}>
+      <Box alignContent={"center"} mt={10}>
         <Box
           display={"grid"}
           justifyContent={"center"}
-          gridTemplateColumns={`repeat(${gridSize}, 50px)`}
-          gridTemplateRows={`repeat(${gridSize}, 50px)`}
+          gridTemplateColumns={{
+            sm: `repeat(${gridSize}, 50px)`,
+            md: `repeat(${gridSize}, 80px)`,
+            lg: `repeat(${gridSize}, 100px)`,
+          }}
+          gridTemplateRows={{
+            sm: `repeat(${gridSize}, 50px)`,
+            md: `repeat(${gridSize}, 80px)`,
+            lg: `repeat(${gridSize}, 100px)`,
+          }}
           gap={2}
-          mb={2}
+          mb={6}
         >
           {createGrid()}
         </Box>
-        <Box display={"flex"} gap={2}>
+        <Box
+          display={"flex"}
+          flexDirection={{ sm: "column", md: "column", lg: "row" }}
+          justifyContent={"center"}
+          gap={2}
+        >
           <CustomButton size="lg" onClick={rotateLeft}>
             Rotate Left
           </CustomButton>
