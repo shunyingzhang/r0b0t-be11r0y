@@ -15,6 +15,7 @@ import {
   useDisclosure,
   Link as ChakraLink,
 } from "@chakra-ui/react";
+import { FaShoppingCart } from "react-icons/fa";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 export default function NavBar() {
@@ -69,8 +70,7 @@ export default function NavBar() {
           direction={"row"}
           spacing={6}
         >
-          {/* <CustomButton onClick={} fontSize="sm">
-          </CustomButton> */}
+          <FaShoppingCart size={18} />
         </Stack>
       </Flex>
       <Collapse in={isOpenMD} animateOpacity>
